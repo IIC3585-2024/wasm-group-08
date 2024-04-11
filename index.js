@@ -19,7 +19,7 @@ function generateArrayAndPrint() {
 
     // // Call the sum_array function from the WASM module
     // const sum = Module._sum_array(pointer, uint32Array.length);
-    const result = Module._findPrimes();
+    const result = Module._findPrimes(parsedInput);
     console.log(`[JS] Ultimo primo: ${result}`);
     // console.log("-------------------------")
 

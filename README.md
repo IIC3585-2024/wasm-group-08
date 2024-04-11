@@ -6,6 +6,6 @@ emcc [path funcion] WASM=1 -s EXPORTED_FUNCTIONS= [funciones a exportar]
 
 emcc path_to_c_file.cpp -O3 -s
 
-emcc lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_primeFactors,_malloc,_free -o func/findPrimes.js
+emcc lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_findPrimes,_malloc,_free -o func/findPrimes.js
 
 python3 -m http.server
