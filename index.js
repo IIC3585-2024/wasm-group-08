@@ -1,7 +1,18 @@
 
 function handleFindPrimes() {
+    const wasmTimeElement = document.getElementById('Time-C');
+    const jsTimeElement = document.getElementById('Time-JS');
+    const startTime = performance.now();
     handleWasmCode();
+    const wasmTime = performance.now() - startTime;
+    console.log(`Wasm Time: ${wasmTime} milliseconds`);
+    wasmTimeElement.textContent = `Wasm Time: ${wasmTime} milliseconds`;
+
+    const startTimeJS = performance.now();
     handleJSCode();
+    const jsTime = performance.now() - startTimeJS;
+    console.log(`JS Time: ${jsTime} milliseconds`);
+    jsTimeElement.textContent = `JS Time: ${jsTime} milliseconds`;
 }
 
 function handleWasmCode() {
