@@ -1,32 +1,38 @@
-function generateArrayAndPrint() {
-    // Get the input value and split it into an array of numbers
+
+function handleFindPrimes() {
+    handleWasmCode();
+    handleJSCode();
+}
+
+function handleWasmCode() {
     const input = document.getElementById('arrayInput').value;
+    const result = document.getElementById('Result-C');
+    result.textContent = "Result: ";
     const parsedInput = parseInt(input);
 
     console.log(`[JS] Numero a calcular: ${parsedInput}`);
 
-    // const numbers = input.split(',').map(Number);
-    // console.log(`[JS] Array elements: ${numbers}`);
+    const numFactorsPointer = Module._malloc(4);
+    const factors = Module._findPrimesC(parsedInput, numFactorsPointer);
+    const numFactors = Module.HEAP32[numFactorsPointer / 4];
+    console.log("number of factors", numFactors);
+    let factor;
+    for (let i = 0; i < numFactors; i++) {
+        factor = Module.HEAP32[factors / 4 + i];
+        result.textContent += `${factor}, `;
+    }
+}
 
-    // // Create a Uint32Array from the numbers
-    // const uint32Array = new Uint32Array(numbers);
+function handleJSCode() {
+    const input = document.getElementById('arrayInput').value;
+    const result = document.getElementById('Result-JS');
+    result.textContent = "Result: ";
+    const parsedInput = parseInt(input);
 
-    // // Allocate memory in the WebAssembly module
-    // const pointer = Module._malloc(uint32Array.length * uint32Array.BYTES_PER_ELEMENT);
 
-    // // Set the values from uint32Array into the allocated memory
-    // Module.HEAPU32.set(uint32Array, pointer / 4);
-
-    // // Call the sum_array function from the WASM module
-    // const sum = Module._sum_array(pointer, uint32Array.length);
-    const result = Module._findPrimes(parsedInput);
-    console.log(`[JS] Ultimo primo: ${result}`);
-    // console.log("-------------------------")
-
-    // // Free the allocated memory
-    // Module._free(pointer);
-
-    // // Display the result in the HTML
-    // const resultDiv = document.getElementById('printArrayResult');
-    // resultDiv.textContent = `Array sum: ${sum}`;
+    const factors = findPrimesJS(parsedInput);
+    const numFactors = factors.length;
+    for (let i = 0; i < numFactors; i++) {
+        result.textContent += `${factors[i]}, `;
+    }
 }

@@ -6,12 +6,16 @@
     <title>WebAssembly Example</title>
     <script src="func/findPrimes.js"></script> <!-- Load the wasm file -->
     <script src="index.js"></script><!-- Load the JS file that uses the wasm file -->
+    <script src="lib/findPrimes.js"></script>
 </head>
 <body>
     <label for="arrayInput">Enter numbers separated by commas:</label>
     <input type="text" id="arrayInput" value="1234">
-    <button onclick="generateArrayAndPrint()">DAME LOS PRIMOS UwU</button>
-    <p>Open the browser console to see logs from wasm</p>
-    <div id="printArrayResult"></div>
+    <button onclick="handleFindPrimes()">DAME LOS PRIMOS UwU</button>
+    <br>
+    <p id="Result-C"></p>
+    <p id="Result-JS"></p>
+
+
 </body>
 </html>
