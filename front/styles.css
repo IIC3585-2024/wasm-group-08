@@ -1,0 +1,106 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f5;
+  color: #333;
+}
+h1 {
+  color: #2a2a72;
+  text-align: center;
+}
+p {
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+input[type="number"] {
+  padding: 10px;
+  width: calc(100% - 24px);
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+button {
+  background-color: #4caf50; /* Verde */
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+button:hover {
+  background-color: #45a049;
+}
+
+#optimizationLevel {
+  padding: 10px;
+  width: 10%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+#optimizationLevel:hover {
+  background-color: #f8f8f8;
+}
+
+#optimizationLevel:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+#resultado {
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.meta {
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+.carrera {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  margin-bottom: 20px;
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.auto {
+  position: absolute;
+  top: 10px;
+  width: 40px;
+  text-align: center;
+}
+#pistaCarrera {
+  border: 2px solid #000;
+  width: 650px;
+  padding: 20px;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+}
+#analisisCarrera {
+  background-color: #f9f9f9;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.nombreAuto {
+  padding-top: 40px;
+}

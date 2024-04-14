@@ -32,5 +32,4 @@ emcc -Oz lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_findPrimesC,_malloc,_
 
 emcc -Og lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_findPrimesC,_malloc,_free -s EXPORT_NAME="'ModuleOg'" -s MODULARIZE=1 -o func/findPrimesOg.js
 
-
 python3 -m http.server
