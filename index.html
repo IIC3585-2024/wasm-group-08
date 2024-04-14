@@ -1,35 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebAssembly Example</title>
-    <script src="func/findPrimes.js"></script> <!-- Load the wasm file -->
-    <script src="index.js"></script><!-- Load the JS file that uses the wasm file -->
-    <script src="lib/findPrimes.js"></script>
-</head>
-<body>
-    <label for="arrayInput">Enter numbers separated by commas:</label>
-    <input type="text" id="arrayInput" value="1234">
-    <button onclick="handleFindPrimes()">DAME LOS PRIMOS UwU</button>
-    <br>
-    <p id="Result-C"></p>
-    <p id="Time-C"></p>
-    <p id="Result-JS"></p>
-    <p id="Time-JS"></p>
-
-    <h1>Multiple numbers generator</h1>
-    <label for="num">Enter the number of random numbers:</label>
-    <input type="number" id="num" min="1">
-    <button onclick="generateNumbers()">Generate</button>
-    <br><br>
-    <label for="output">Random Numbers:</label>
-    <button onclick="calculatePrimeFactors()">Calculate Prime Factors</button>
-    <br><br>
-    <div id="executionTime"></div>
-    <br><br>
-    <div id="randomNumbersContainer"></div>
-
-
-</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gran Premio de la Factorización</title>
+    <link rel="stylesheet" type="text/css" href="front/styles.css" />
+  </head>
+  <body>
+    <h1>Gran Premio de la Factorización</h1>
+    <p>
+      En el vasto mundo de la computación nunca ha habido un corredor más rápido
+      que el legendario VelozScript. Sin embargo, un nuevo competidor ha
+      surgido... AssembliRápido, quien además tiene la capacidad de clonarse a
+      sí mismo con la capacidad de correr con diferentes motores. Puede separar
+      VelozScript, quién nunca ha perdido no parece estar preocupado, pero
+      AssembliRápido menciona que ganará facilmente. Es así como VelozScript y
+      AssembliRápido, se enfrentan en una épica carrera. ¿Cuál demostrará ser el
+      más rápido factorizando números? ¡Tú decides!
+    </p>
+    <input
+      type="number"
+      id="numero"
+      placeholder="Ingresa un número para la carrera"
+    />
+    <button id="iniciarCarrera">Iniciar Carrera</button>
+    <div id="resultado"></div>
+    <div id="analisisCarrera">
+      <h2>¡Es claro quién es el ganador... pero, espera un momento!</h2>
+      <p>
+        El perdedor, sin querer admitir la derrota tan fácilmente, murmura algo
+        sobre "márgenes pequeños" y "diferencias insignificantes". ¿Será cierto?
+        ¿La gloria fue decidida por apenas un suspiro de diferencia?
+      </p>
+      <p>
+        ¡Ha llegado el momento de la verdad! ¿Fue una victoria aplastante o una
+        carrera reñida? ¡Prepárate para la revancha y descubre cuánto más rápido
+        es un método sobre el otro en nuestra espectacular visualización de la
+        carrera!
+      </p>
+    </div>
+    <button id="verCarrera">Ver Carrera</button>
+    <div id="pistaCarrera">
+      <div class="carrera">
+        <div class="nombreAuto" class="auto">VelozScript</div>
+        <div id="autoJavaScript" class="auto">🚗</div>
+        <div class="meta">🏁</div>
+      </div>
+      <div class="carrera">
+        <div class="nombreAuto" class="auto">AssembliRápido</div>
+        <div id="autoWebAssembly" class="auto">🚙</div>
+        <div class="meta">🏁</div>
+      </div>
+    </div>
+    <script src="front/app.js"></script>
+  </body>
 </html>
