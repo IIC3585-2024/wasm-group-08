@@ -20,35 +20,35 @@ function handleFindPrimes() {
     jsTimeElement.textContent = `JS Time: ${jsTime} milliseconds`;
 }
 
-function handleWasmCode(input, result) {
+// function handleWasmCode(input, result) {
 
-    result.textContent = "Result [wasm]: ";
-    const parsedInput = parseInt(input);
+//     result.textContent = "Result [wasm]: ";
+//     const parsedInput = parseInt(input);
 
-    console.log(`[JS] Numero a calcular: ${parsedInput}`);
+//     console.log(`[JS] Numero a calcular: ${parsedInput}`);
 
-    const numFactorsPointer = Module._malloc(4);
-    const factors = Module._findPrimesC(parsedInput, numFactorsPointer);
-    const numFactors = Module.HEAP32[numFactorsPointer / 4];
-    console.log("number of factors", numFactors);
-    let factor;
-    for (let i = 0; i < numFactors; i++) {
-        factor = Module.HEAP32[factors / 4 + i];
-        result.textContent += `${factor}, `;
-    }
-}
+//     const numFactorsPointer = Module._malloc(4);
+//     const factors = Module._findPrimesC(parsedInput, numFactorsPointer);
+//     const numFactors = Module.HEAP32[numFactorsPointer / 4];
+//     console.log("number of factors", numFactors);
+//     let factor;
+//     for (let i = 0; i < numFactors; i++) {
+//         factor = Module.HEAP32[factors / 4 + i];
+//         result.textContent += `${factor}, `;
+//     }
+// }
 
-function handleJSCode(input, result) {
-    result.textContent = "Result [js]: ";
-    const parsedInput = parseInt(input);
+// function handleJSCode(input, result) {
+//     result.textContent = "Result [js]: ";
+//     const parsedInput = parseInt(input);
 
 
-    const factors = findPrimesJS(parsedInput);
-    const numFactors = factors.length;
-    for (let i = 0; i < numFactors; i++) {
-        result.textContent += `${factors[i]}, `;
-    }
-}
+//     const factors = findPrimesJS(parsedInput);
+//     const numFactors = factors.length;
+//     for (let i = 0; i < numFactors; i++) {
+//         result.textContent += `${factors[i]}, `;
+//     }
+// }
 
 function generateNumbers() {
     var numInput = document.getElementById("num");
