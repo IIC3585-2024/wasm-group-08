@@ -1,6 +1,30 @@
 
+
 let globalTiempoJavaScript = 0;
 let globalTiempoWebAssembly = 0;
+
+let module;
+
+const optimizationModules = {
+  "O0": () => window.ModuleO0({ noInitialRun: true }),
+  "O1": () => window.ModuleO1({ noInitialRun: true }),
+  "O2": () => window.ModuleO2({ noInitialRun: true }),
+  "Os": () => window.ModuleOs({ noInitialRun: true }),
+  "Oz": () => window.ModuleOz({ noInitialRun: true }),
+  "Og": () => window.ModuleOg({ noInitialRun: true }),
+  "O3": () => window.ModuleO3({ noInitialRun: true })
+};
+
+async function updateModule() {
+  const optimizationLevel = document.getElementById("optimizationLevel").value;
+  module = await optimizationModules[optimizationLevel]();
+}
+
+updateModule()
+
+document.getElementById("optimizationLevel").addEventListener("change", function() {
+  updateModule();
+});
 
 document.addEventListener("DOMContentLoaded", (event) => {
   document.getElementById("iniciarCarrera").addEventListener("click", () => {
@@ -52,27 +76,16 @@ function handleJSCode(input) {
 function handleWasmCode(input) {
   const parsedInput = parseInt(input);
   let result = "";
-  const numFactorsPointer = Module._malloc(4);
-
-  const optimizationLevel = document.getElementById("optimizationLevel").value;
-  const optimizationFunctions = {
-    "O0": Module._findPrimesC,
-    "O1": Module._findPrimesO1,
-    "O2": Module._findPrimesO2,
-    "Os": Module._findPrimesOs,
-    "Oz": Module._findPrimesOz,
-    "Og": Module._findPrimesOg,
-    "O3": Module._findPrimesO3
-  };
-  const factors = optimizationFunctions[optimizationLevel](parsedInput, numFactorsPointer);
   
-  const numFactors = Module.HEAP32[numFactorsPointer / 4];
+  const numFactorsPointer = module._malloc(4);
+  const factors = module._findPrimesC(parsedInput, numFactorsPointer);
+  
+  const numFactors = module.HEAP32[numFactorsPointer / 4];
   let factor;
   for (let i = 0; i < numFactors; i++) {
-      factor = Module.HEAP32[factors / 4 + i];
+      factor = module.HEAP32[factors / 4 + i];
       result += `${factor}, `;
   }
-  console.log(result);
   return result;
 }
 

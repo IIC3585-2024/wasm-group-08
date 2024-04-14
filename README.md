@@ -6,6 +6,6 @@ emcc [path funcion] WASM=1 -s EXPORTED_FUNCTIONS= [funciones a exportar]
 
 emcc path_to_c_file.cpp -O3 -s
 
-emcc lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_findPrimesC,_malloc,_free -o func/findPrimes.js
+emcc lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_findPrimesC,_malloc,_free -o func/findPrimes.js -s EXPORT_NAME="'ModuleO1'" -s MODULARIZE=1
 
 python3 -m http.server
