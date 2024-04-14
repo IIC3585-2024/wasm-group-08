@@ -1,2 +1,2 @@
-/func/findPrimes.js
-/func/findPrimes.wasm
+/func/*.js
+/func/*.wasm

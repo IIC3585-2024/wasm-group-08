@@ -1,3 +1,5 @@
+// const ModuleO0 = require("./func/findPrimesO0");
+// const ModuleO1 = require("./func/findPrimesO1");
 
 function handleFindPrimes() {
     const wasmTimeElement = document.getElementById('Time-C');
@@ -26,7 +28,6 @@ function handleWasmCode(input, result) {
     const parsedInput = parseInt(input);
 
     console.log(`[JS] Numero a calcular: ${parsedInput}`);
-
     const numFactorsPointer = Module._malloc(4);
     const factors = Module._findPrimesC(parsedInput, numFactorsPointer);
     const numFactors = Module.HEAP32[numFactorsPointer / 4];
@@ -36,6 +37,18 @@ function handleWasmCode(input, result) {
         factor = Module.HEAP32[factors / 4 + i];
         result.textContent += `${factor}, `;
     }
+    /* ModuleO0().then((Module) => {
+        const numFactorsPointer = Module._malloc(4);
+        const factors = Module._findPrimesC(parsedInput, numFactorsPointer);
+        const numFactors = Module.HEAP32[numFactorsPointer / 4];
+        console.log("number of factors", numFactors);
+        let factor;
+        for (let i = 0; i < numFactors; i++) {
+            factor = Module.HEAP32[factors / 4 + i];
+            result.textContent += `${factor}, `;
+        }
+    }); */
+    
 }
 
 function handleJSCode(input, result) {
