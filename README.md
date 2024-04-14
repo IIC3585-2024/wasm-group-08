@@ -14,6 +14,10 @@ emcc [path funcion] WASM=1 -s EXPORTED_FUNCTIONS= [funciones a exportar]
 
 # Comandos utilizados:
 
+./emsdk activate latest
+
+source ./emsdk_env.sh
+
 emcc lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_findPrimesC,_malloc,_free -o func/findPrimesO0.js
 
 emcc -O1 lib/findPrimes.c -s WASM=1 -s EXPORTED_FUNCTIONS=_findPrimesC,_malloc,_free -o func/findPrimesO1.js
