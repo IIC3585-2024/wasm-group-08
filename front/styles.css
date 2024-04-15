@@ -56,7 +56,7 @@ button:hover {
   outline: none;
 }
 
-#resultado {
+.resultado {
   background-color: #fff;
   margin-top: 20px;
   padding: 20px;

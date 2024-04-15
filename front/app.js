@@ -1,18 +1,16 @@
-
-
 let globalTiempoJavaScript = 0;
 let globalTiempoWebAssembly = 0;
 
 let module;
 
 const optimizationModules = {
-  "O0": () => window.ModuleO0({ noInitialRun: true }),
-  "O1": () => window.ModuleO1({ noInitialRun: true }),
-  "O2": () => window.ModuleO2({ noInitialRun: true }),
-  "Os": () => window.ModuleOs({ noInitialRun: true }),
-  "Oz": () => window.ModuleOz({ noInitialRun: true }),
-  "Og": () => window.ModuleOg({ noInitialRun: true }),
-  "O3": () => window.ModuleO3({ noInitialRun: true })
+  O0: () => window.ModuleO0({ noInitialRun: true }),
+  O1: () => window.ModuleO1({ noInitialRun: true }),
+  O2: () => window.ModuleO2({ noInitialRun: true }),
+  Os: () => window.ModuleOs({ noInitialRun: true }),
+  Oz: () => window.ModuleOz({ noInitialRun: true }),
+  Og: () => window.ModuleOg({ noInitialRun: true }),
+  O3: () => window.ModuleO3({ noInitialRun: true }),
 };
 
 async function updateModule() {
@@ -20,11 +18,13 @@ async function updateModule() {
   module = await optimizationModules[optimizationLevel]();
 }
 
-updateModule()
+updateModule();
 
-document.getElementById("optimizationLevel").addEventListener("change", function() {
-  updateModule();
-});
+document
+  .getElementById("optimizationLevel")
+  .addEventListener("change", function () {
+    updateModule();
+  });
 
 document.addEventListener("DOMContentLoaded", (event) => {
   document.getElementById("iniciarCarrera").addEventListener("click", () => {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       mostrarResultado("Por favor, ingresa un número válido.");
     }
   });
-  
+
   document.getElementById("resetearCarrera").addEventListener("click", () => {
     resetearCarrera();
   });
@@ -45,9 +45,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 function iniciarCarrera(numero) {
-  // Aqui deberia haber una funcion o algo que obtenga los resultados de los algoritmos
-  const factoresSimulados = []; // Averiguar como obtener resultado del agloritmo
-
   const algoritmoJavascript = () => handleJSCode(numero);
   const algoritmoWasm = () => handleWasmCode(numero);
   const [tiempoJs, factorsJS] = correrAlgoritmo(algoritmoJavascript);
@@ -55,10 +52,14 @@ function iniciarCarrera(numero) {
   globalTiempoJavaScript = tiempoJs;
   globalTiempoWebAssembly = tiempoWasm;
 
-  const mensajeResultado = `Carrera completada. <br> JavaScript terminó en ${globalTiempoJavaScript}ms. <br> Los factores resultantes son: ${factorsJS} <br> WebAssembly terminó en ${globalTiempoWebAssembly}ms. <br> Los factores resultantes son: ${factorsWasm} <br> ¡Parece que tenemos un ganador!`;
+  const resultado = {
+    factorsJS,
+    tiempoJs,
+    factorsWasm,
+    tiempoWasm,
+  };
 
-  // Mostramos el resultado y los factores primos.
-  mostrarResultado(mensajeResultado, factorsJS);
+  mostrarResultado(resultado);
 }
 
 function handleJSCode(input) {
@@ -67,7 +68,7 @@ function handleJSCode(input) {
   const factors = findPrimesJS(parsedInput);
   const numFactors = factors.length;
   for (let i = 0; i < numFactors; i++) {
-      result += `${factors[i]}, `;
+    result += `${factors[i]}, `;
   }
 
   return result;
@@ -76,15 +77,15 @@ function handleJSCode(input) {
 function handleWasmCode(input) {
   const parsedInput = parseInt(input);
   let result = "";
-  
+
   const numFactorsPointer = module._malloc(4);
   const factors = module._findPrimesC(parsedInput, numFactorsPointer);
-  
+
   const numFactors = module.HEAP32[numFactorsPointer / 4];
   let factor;
   for (let i = 0; i < numFactors; i++) {
-      factor = module.HEAP32[factors / 4 + i];
-      result += `${factor}, `;
+    factor = module.HEAP32[factors / 4 + i];
+    result += `${factor}, `;
   }
   return result;
 }
@@ -96,18 +97,39 @@ function correrAlgoritmo(handlefindprimesFunction) {
   return [endTime, factors];
 }
 
-function mostrarResultado(mensaje, factores) {
-  const resultadoDiv = document.getElementById("resultado");
-  const factoresTexto = `Los números primos que multiplicados dan este número son: ${factores}.`;
-  resultadoDiv.innerHTML = `${mensaje}<br>${factoresTexto}`;
+function mostrarResultado(resultado) {
+  const factoresJS = resultado.factorsJS;
+  const tiempoJS = resultado.tiempoJs;
+  const factoresWasm = resultado.factorsWasm;
+  const tiempoWasm = resultado.tiempoWasm;
+
+  const finCarreraDiv = document.getElementById("finCarrera");
+  const resultadoFactoresJSDiv = document.getElementById("resultadoFactores");
+  const resultadoTiempoJSDiv = document.getElementById("resultadoTiempoJS");
+  const resultadoFactoresWasmDiv = document.getElementById(
+    "resultadoFactoresWasm"
+  );
+  const resultadoTiempoWasmDiv = document.getElementById("resultadoTiempoWasm");
+
+  const mensajeFinCarrera = `Carrera completada. ¡Parece que tenemos un ganador!`;
+  const mensajeFactoresJS = `Los factores primos para JS son: ${factoresJS}`;
+  const mensajeTiempoJS = `JavaScript terminó en ${tiempoJS}ms. `;
+  const mensajeFactoresWasm = `Los factores primos para Wasm son: ${factoresWasm}`;
+  const mensajeTiempoWasm = `WebAssembly terminó en ${tiempoWasm}ms. `;
+
+  finCarreraDiv.innerHTML = mensajeFinCarrera;
+  resultadoFactoresJSDiv.innerHTML = mensajeFactoresJS;
+  resultadoTiempoJSDiv.innerHTML = mensajeTiempoJS;
+  resultadoFactoresWasmDiv.innerHTML = mensajeFactoresWasm;
+  resultadoTiempoWasmDiv.innerHTML = mensajeTiempoWasm;
 }
 
 function resetearCarrera() {
   const autoJavaScript = document.getElementById("autoJavaScript");
   const autoWebAssembly = document.getElementById("autoWebAssembly");
 
-  autoJavaScript.style.transition = 'none';
-  autoWebAssembly.style.transition = 'none';
+  autoJavaScript.style.transition = "none";
+  autoWebAssembly.style.transition = "none";
 
   autoJavaScript.style.transform = "translateX(0px)";
   autoWebAssembly.style.transform = "translateX(0px)";
@@ -115,10 +137,9 @@ function resetearCarrera() {
   autoJavaScript.offsetHeight;
   autoWebAssembly.offsetHeight;
 
-  autoJavaScript.style.transition = '';
-  autoWebAssembly.style.transition = '';
+  autoJavaScript.style.transition = "";
+  autoWebAssembly.style.transition = "";
 }
-
 
 function iniciarCarreraJSvsWasm(tiempoJS, tiempoWasm) {
   const tiempoMaximo = Math.max(tiempoJS, tiempoWasm);
@@ -133,4 +154,3 @@ function iniciarCarreraJSvsWasm(tiempoJS, tiempoWasm) {
   autoWebAssembly.style.transition = `transform ${duracionWasm}s linear`;
   autoWebAssembly.style.transform = "translateX(600px)";
 }
-
