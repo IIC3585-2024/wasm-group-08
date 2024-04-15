@@ -67,6 +67,7 @@ button:hover {
   position: absolute;
   right: 0;
   top: 10px;
+  font-size: 30px;
 }
 .carrera {
   position: relative;
@@ -76,12 +77,15 @@ button:hover {
   background-color: #ddd;
   border-radius: 10px;
   overflow: hidden;
+  padding: 10px;
 }
 .auto {
   position: absolute;
   top: 10px;
   width: 40px;
   text-align: center;
+  font-size: 50px;
+  transform: scaleX(-1);
 }
 #pistaCarrera {
   border: 2px solid #000;
@@ -102,5 +106,5 @@ button:hover {
 }
 
 .nombreAuto {
-  padding-top: 40px;
+  padding-top: 65px;
 }

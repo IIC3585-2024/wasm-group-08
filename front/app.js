@@ -104,7 +104,7 @@ function mostrarResultado(resultado) {
   const tiempoWasm = resultado.tiempoWasm;
 
   const finCarreraDiv = document.getElementById("finCarrera");
-  const resultadoFactoresJSDiv = document.getElementById("resultadoFactores");
+  const resultadoFactoresJSDiv = document.getElementById("resultadoFactoresJS");
   const resultadoTiempoJSDiv = document.getElementById("resultadoTiempoJS");
   const resultadoFactoresWasmDiv = document.getElementById(
     "resultadoFactoresWasm"
@@ -131,8 +131,8 @@ function resetearCarrera() {
   autoJavaScript.style.transition = "none";
   autoWebAssembly.style.transition = "none";
 
-  autoJavaScript.style.transform = "translateX(0px)";
-  autoWebAssembly.style.transform = "translateX(0px)";
+  autoJavaScript.style.transform = "scaleX(-1) translateX(0px)";
+  autoWebAssembly.style.transform = "scaleX(-1) translateX(0px)";
 
   autoJavaScript.offsetHeight;
   autoWebAssembly.offsetHeight;
@@ -148,9 +148,9 @@ function iniciarCarreraJSvsWasm(tiempoJS, tiempoWasm) {
 
   const autoJavaScript = document.getElementById("autoJavaScript");
   autoJavaScript.style.transition = `transform ${duracionJS}s linear`;
-  autoJavaScript.style.transform = "translateX(600px)";
+  autoJavaScript.style.transform = "scaleX(-1) translateX(-600px)";
 
   const autoWebAssembly = document.getElementById("autoWebAssembly");
   autoWebAssembly.style.transition = `transform ${duracionWasm}s linear`;
-  autoWebAssembly.style.transform = "translateX(600px)";
+  autoWebAssembly.style.transform = "scaleX(-1) translateX(-600px)";
 }
