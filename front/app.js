@@ -91,7 +91,7 @@ function handleWasmCode(input) {
 }
 
 function correrAlgoritmo(handlefindprimesFunction) {
-  let repeticiones = 15;
+  const repeticiones = document.getElementById("repeticiones").value || 30;
   let tiempoTotal = 0;
   let factors;
   for (let i = 0; i < repeticiones; i++) {
@@ -100,7 +100,7 @@ function correrAlgoritmo(handlefindprimesFunction) {
     const endTime = performance.now() - startTime;
     tiempoTotal += endTime;
   }
-  return [tiempoTotal/repeticiones, factors];
+  return [tiempoTotal / repeticiones, factors];
 }
 
 function mostrarResultado(resultado) {
@@ -119,9 +119,9 @@ function mostrarResultado(resultado) {
 
   const mensajeFinCarrera = `Carrera completada. ¡Parece que tenemos un ganador!`;
   const mensajeFactoresJS = `Los factores primos para JS son: ${factoresJS}`;
-  const mensajeTiempoJS = `JavaScript terminó en ${tiempoJS}ms. `;
+  const mensajeTiempoJS = `Javascript tuvo un tiempo promedio de ${tiempoJS}ms. `;
   const mensajeFactoresWasm = `Los factores primos para Wasm son: ${factoresWasm}`;
-  const mensajeTiempoWasm = `WebAssembly terminó en ${tiempoWasm}ms. `;
+  const mensajeTiempoWasm = `WebAssembly tuvo un tiempo promedio de ${tiempoWasm}ms. `;
 
   finCarreraDiv.innerHTML = mensajeFinCarrera;
   resultadoFactoresJSDiv.innerHTML = mensajeFactoresJS;

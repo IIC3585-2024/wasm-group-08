@@ -18,15 +18,22 @@
       AssembliRápido, se enfrentan en una épica carrera. ¿Cuál demostrará ser el
       más rápido factorizando números? ¡Tú decides!
     </p>
-    <select id="optimizationLevel">
-        <option value="O0">O0</option>
-        <option value="O1">O1</option>
-        <option value="O2">O2</option>
-        <option value="O3">O3</option>
-        <option value="Os">Os</option>
-        <option value="Oz">Oz</option>
-        <option value="Og">Og</option>
-    </select>
+    <div class="configuration">
+      <select id="optimizationLevel">
+          <option value="O0">O0</option>
+          <option value="O1">O1</option>
+          <option value="O2">O2</option>
+          <option value="O3">O3</option>
+          <option value="Os">Os</option>
+          <option value="Oz">Oz</option>
+          <option value="Og">Og</option>
+      </select>
+      <input
+        type="number"
+        id="repeticiones"
+        placeholder="Repeticiones"
+      />
+    </div>
     <input
       type="number"
       id="numero"
