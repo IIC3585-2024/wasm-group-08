@@ -91,10 +91,16 @@ function handleWasmCode(input) {
 }
 
 function correrAlgoritmo(handlefindprimesFunction) {
-  const startTime = performance.now();
-  const factors = handlefindprimesFunction();
-  const endTime = performance.now() - startTime;
-  return [endTime, factors];
+  let repeticiones = 15;
+  let tiempoTotal = 0;
+  let factors;
+  for (let i = 0; i < repeticiones; i++) {
+    const startTime = performance.now();
+    factors = handlefindprimesFunction();
+    const endTime = performance.now() - startTime;
+    tiempoTotal += endTime;
+  }
+  return [tiempoTotal/repeticiones, factors];
 }
 
 function mostrarResultado(resultado) {
